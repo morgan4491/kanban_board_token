@@ -7,7 +7,7 @@ import Swimlane from '../components/Swimlane';
 import { TicketData } from '../interfaces/TicketData';
 import { ApiMessage } from '../interfaces/ApiMessage';
 
-import auth from '../utils/auth';
+import { checkAuthentication } from '../api/authAPI';
 
 const boardStates = ['Todo', 'In Progress', 'Done'];
 
@@ -16,11 +16,10 @@ const Board = () => {
   const [error, setError] = useState(false);
   const [loginCheck, setLoginCheck] = useState(false);
 
-  const checkLogin = () => {
-    if(auth.loggedIn()) {
-      setLoginCheck(true);
-    }
-  };
+  useEffect(() => {
+    checkAuthentication()
+      .then((result: boolean) => setLoginCheck(result))
+  }, []);
 
   const fetchTickets = async () => {
     try {
@@ -41,16 +40,6 @@ const Board = () => {
       return Promise.reject(err);
     }
   }
-
-  useLayoutEffect(() => {
-    checkLogin();
-  }, []);
-
-  useEffect(() => {
-    if(loginCheck) {
-      fetchTickets();
-    }
-  }, [loginCheck]);
 
   if (error) {
     return <ErrorPage />;

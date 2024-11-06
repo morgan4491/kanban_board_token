@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import routes from './routes/index.js';
 import { sequelize } from './models/index.js';
 
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 3001;
 app.use(express.static('../client/dist'));
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(routes);
 
 sequelize.sync({force: forceDatabaseRefresh}).then(() => {

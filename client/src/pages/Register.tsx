@@ -1,10 +1,10 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 import { useNavigate } from 'react-router-dom';
 
-import { login } from "../api/authAPI";
+import { register } from "../api/authAPI";
 
-const Login = () => {
-  const [loginData, setLoginData] = useState({
+const Register = () => {
+  const [registerData, setRegisterData] = useState({
     username: '',
     password: ''
   });
@@ -12,8 +12,8 @@ const Login = () => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setLoginData({
-      ...loginData,
+    setRegisterData({
+      ...registerData,
       [name]: value
     });
   };
@@ -22,10 +22,10 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      await login(loginData);
+      await register(registerData);
       navigate('/');
     } catch (err) {
-      console.error('Failed to login', err);
+      console.error('Failed to register', err);
     }
     
   };
@@ -33,19 +33,19 @@ const Login = () => {
   return (
     <div className='container'>
       <form className='form' onSubmit={handleSubmit}>
-        <h1>Login</h1>
+        <h1>Register</h1>
         <label >Username</label>
         <input 
           type='text'
           name='username'
-          value={loginData.username || ''}
+          value={registerData.username || ''}
           onChange={handleChange}
         />
       <label>Password</label>
         <input 
           type='password'
           name='password'
-          value={loginData.password || ''}
+          value={registerData.password || ''}
           onChange={handleChange}
         />
         <button type='submit'>Submit Form</button>
@@ -55,4 +55,4 @@ const Login = () => {
   )
 };
 
-export default Login;
+export default Register;

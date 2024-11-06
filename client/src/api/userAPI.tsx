@@ -1,20 +1,14 @@
-import Auth from '../utils/auth';
+import axios from 'axios';
 
 const retrieveUsers = async () => {
   try {
-    const response = await fetch('/api/users', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${Auth.getToken()}`
-      }
-    });
-    const data = await response.json();
+    const res = await axios.get('/api/user')
 
-    if(!response.ok) {
+    if(res.status !== 200) {
       throw new Error('invalid user API response, check network tab!');
     }
 
-    return data;
+    return res.data;
 
   } catch (err) { 
     console.log('Error from data retrieval:', err);
