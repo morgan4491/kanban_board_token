@@ -37,9 +37,9 @@ body {
   background-size: cover;
   background-repeat: no-repeat no-repeat;
   background-position: center center;
-  margin: 0;
-  place-items: center;
+  margin: 0 auto;
   min-width: 320px;
+  max-width: 1000px;
   min-height: 100vh;
 }
 
@@ -67,6 +67,23 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading h3 {
+  margin: 0;
+  padding: 0;
 }
 
 main {
@@ -97,6 +114,7 @@ tbody tr:nth-child(odd) {
   display: flex;
   margin-left: auto;
   flex-direction: row;
+  align-items: center;
 }
 
 .nav-title {
@@ -117,8 +135,16 @@ tbody tr:nth-child(odd) {
   list-style: none;
 }
 
+.nav-item:not(:last-child) {
+  margin-right: 10px;
+}
+
 .nav-item button {
   color: #000;
+}
+
+.nav-item p {
+  margin-right: 15px;
 }
 
 .nav-link {
@@ -148,7 +174,7 @@ tbody tr:nth-child(odd) {
   text-align: center;
   font-weight: 500;
   width: 33%;
-  height: 90vh;
+  min-height: 90vh;
   border: 1px solid rgba(0, 0, 0, 0.2);
   margin: 5px;
   padding: 5px;
@@ -197,6 +223,7 @@ tbody tr:nth-child(odd) {
 .form {
   width: 60%;
   max-width: 600px;
+  margin: 0 auto;
   background-color: #f4ebd9;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -207,6 +234,11 @@ tbody tr:nth-child(odd) {
 .form h1 {
   text-align: center;
   color: #444 !important;
+}
+
+.form p.error {
+  text-align: center;
+  color: #be1d35;
 }
 
 .form>h1,
@@ -225,6 +257,10 @@ tbody tr:nth-child(odd) {
 
 .form button {
   color: #444;
+}
+
+form a button {
+  width: 100%;
 }
 
 .editBtn {
@@ -253,4 +289,50 @@ tbody tr:nth-child(odd) {
   align-items: center;
   justify-content: center;
   color: #ddd;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: column;
+  }
+
+  .nav ul {
+    /* flex-direction: column; */
+    justify-content: center;
+    margin-left: 0;
+    padding: 0;
+  }
+
+  .nav .nav-item {
+    margin: 0 5px !important;
+  }
+
+  .nav .nav-item:has(p) {
+    display: none;
+  }
+
+  .nav .nav-item button {
+    width: 150px;
+  }
+
+
+  main {
+    min-height: auto;
+  }
+
+  .board {
+    width: auto;
+    flex: 1;
+  }
+
+  .board-display {
+    flex-direction: column;
+    padding: 0 4%;
+  }
+
+  .swim-lane {
+    width: 100%;
+    margin: 0 0 35px;
+    min-height: auto;
+  }
 }

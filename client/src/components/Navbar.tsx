@@ -1,20 +1,18 @@
-import { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { checkAuthentication, logOut } from '../api/authAPI';
+import { logOut } from '../api/authAPI';
 
-const Navbar = () => {
-  const [ loginCheck, setLoginCheck ] = useState(false);
+import { LoginProps } from '../interfaces/LoginProps';
+
+const Navbar = ({
+  user,
+  setUser
+}: LoginProps) => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    checkAuthentication()
-      .then((result: boolean) => setLoginCheck(result))
-  }, [])
 
   const logoutUser = async () => {
     await logOut();
 
-    setLoginCheck(false);
+    setUser(null);
     navigate('/login');
   }
 
@@ -24,20 +22,36 @@ const Navbar = () => {
         <NavLink to='/'>Krazy Kanban Board</NavLink>
       </div>
       <ul>
-      {
-        !loginCheck ? (
-          <li className='nav-item'>
-            <button type='button'>
-              <NavLink to='/login'>Login</NavLink>
-              <NavLink to='/register'>Register</NavLink>
-            </button>
-          </li>
-        ) : (
-          <li className='nav-item'>
-            <button type='button' onClick={logoutUser}>Logout</button>
-          </li>
-        )
-      }
+        {
+          !user ? (
+            <>
+              <li className='nav-item'>
+                <NavLink to='/login'>
+                  <button type='button'>Login</button>
+                </NavLink>
+              </li>
+              <li className='nav-item'>
+                <NavLink to='/register'>
+                  <button type='button'>Register</button>
+                </NavLink>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className='nav-item'>
+                <p>Welcome, {user.username}</p>
+              </li>
+              <li className='nav-item' id='create-ticket-link'>
+                <NavLink to='/create'>
+                  <button type='button'>New Ticket</button>
+                </NavLink>
+              </li>
+              <li className='nav-item'>
+                <button type='button' onClick={logoutUser}>Logout</button>
+              </li>
+            </>
+          )
+        }
       </ul>
     </div>
   )

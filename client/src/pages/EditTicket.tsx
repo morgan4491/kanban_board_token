@@ -1,5 +1,5 @@
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, NavLink } from 'react-router-dom';
 
 import { retrieveTicket, updateTicket } from '../api/ticketAPI';
 import { TicketData } from '../interfaces/TicketData';
@@ -23,10 +23,10 @@ const EditTicket = () => {
     fetchTicket(state);
   }, []);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (ticket && ticket.id !== null){
-      updateTicket(ticket.id, ticket);
+      await updateTicket(ticket.id, ticket);
       navigate('/');
     }
     else{
@@ -77,6 +77,9 @@ const EditTicket = () => {
                 onChange={handleTextAreaChange}
               />
               <button type='submit'>Submit Form</button>
+              <NavLink to="/">
+                <button type='submit'>Cancel</button>
+              </NavLink>
             </form>
           ) : (
             <div>Issues fetching ticket</div>

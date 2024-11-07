@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { Ticket } from '../models/ticket.js';
-import { User } from '../models/user.js';
+import { Ticket } from '../models/Ticket.js';
+import { User } from '../models/User.js';
 
 // GET /tickets
 export const getAllTickets = async (_req: Request, res: Response) => {
@@ -48,7 +48,7 @@ export const createTicket = async (req: Request, res: Response) => {
   const { name, status, description, assignedUserId } = req.body;
   try {
     const newTicket = await Ticket.create({ name, status, description, assignedUserId });
-    res.status(201).json(newTicket);
+    res.json(newTicket);
   } catch (error: any) {
     res.status(400).json({ message: error.message });
   }

@@ -1,5 +1,7 @@
 import { useState, FormEvent, ChangeEvent } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
+import { LoginProps } from '../interfaces/LoginProps';
+
 
 import { register } from "../api/authAPI";
 
@@ -8,6 +10,7 @@ const Register = () => {
     username: '',
     password: ''
   });
+  const { setUser } = useOutletContext<LoginProps>();
   const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -22,7 +25,9 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      await register(registerData);
+      const user = await register(registerData);
+
+      setUser(user);
       navigate('/');
     } catch (err) {
       console.error('Failed to register', err);
@@ -39,6 +44,7 @@ const Register = () => {
           type='text'
           name='username'
           value={registerData.username || ''}
+          autoComplete='username'
           onChange={handleChange}
         />
       <label>Password</label>
@@ -46,6 +52,7 @@ const Register = () => {
           type='password'
           name='password'
           value={registerData.password || ''}
+          autoComplete='current-password'
           onChange={handleChange}
         />
         <button type='submit'>Submit Form</button>

@@ -37,8 +37,8 @@ const CreateTicket = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (newTicket){
-      const data = await createTicket(newTicket);
-      console.log(data);
+      await createTicket(newTicket);
+  
       navigate('/');
     }
   }

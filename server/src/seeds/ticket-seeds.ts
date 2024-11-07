@@ -1,4 +1,4 @@
-import { Ticket } from '../models/ticket.js';
+import { Ticket } from '../models/Ticket.js';
 
 export const seedTickets = async () => {
   await Ticket.bulkCreate([

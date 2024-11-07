@@ -8,8 +8,6 @@ Your Challenge this week is to add authentication with JWT to an existing Kanban
 
 The Kanban board application has already been created. It's your job to complete the UI for the login page, add authentication with JWT to the server API, and then deploy the entire application to Render.
 
-> **important** Make sure to download and unzip the starter code files and make your own repository with the starter code.
-
 
 ## User Story
 
@@ -59,6 +57,8 @@ The starter code provides a complete, working full-stack application without aut
 
 You will need to:
 
+* Run the `install:all` script at the top level package.json to install the server and client modules
+
 * Create a `.env` file for the server that includes:
 
   * A username for the database
@@ -66,6 +66,8 @@ You will need to:
   * A password for the database
 
   * A secret key for the JWT (this can be any random string)
+
+* You can run the `seed` script at the top level package.json to insert some dummy data into your tables
 
 * Complete the `loginUser` function in `server/src/controllers/user-controller.ts`
 
@@ -75,7 +77,11 @@ You will need to:
 
 * Complete the `login` function in `client/src/api/authAPI.tsx`
 
-* Complete the `checkAuthentication` function in `client/src/api/authAPI.tsx`
+* Complete the `getUser` function in `client/src/api/authAPI.tsx`
+
+* Complete the `logOut` function in `client/src/api/authAPI.tsx`
+
+* Finish writing the development setup code in server.ts
 
 You can refer to the [Deploy with Render and PostgreSQL guide](https://coding-boot-camp.github.io/full-stack/render/deploy-with-render-and-postgresql) and the [Render documentation on setting environment variables](https://docs.render.com/configure-environment-variables) as needed.
 
@@ -110,7 +116,7 @@ This Challenge is graded based on the following criteria:
 
   * Application server API verifies login requests, creates and signs tokens, and validates that API requests for tickets and users include an authenticated token.
 
-  * Application's client stores tokens in `localStorage` and passes tokens to the server API with each request.
+  * Application's client stores tokens in `cookies` and passes tokens to the server API with each request.
 
   * Application must be deployed to Render.
 
