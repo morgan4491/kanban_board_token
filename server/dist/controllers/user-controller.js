@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { User } from '../models/User.js';
+import { User } from '../models/index.js';
 const { sign, verify } = jwt;
 function createToken(user_id) {
     const secret = process.env.JWT_SECRET;
