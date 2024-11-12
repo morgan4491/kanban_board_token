@@ -3,6 +3,7 @@
 ## Table of Contents:
 - [Description](#description)
 - [License](#license)
+- [Installation](#installation)
 - [Screenshots](#screenshots)
 - [Website](#website)
 - [Questions](#questions)
@@ -14,6 +15,9 @@
   
 ## License:
 - This project is licensed under the MIT license.
+
+## Installation:
+- Visit my GitHub repo and clone the repository. Be sure to 'npm run install:all'. Create a postgres database named 'kanban_db'. Make a copy of my .env-EXAMPLE file and rename it to .env (add all of the .env variable values). To start the application locally, enter 'npm run start:dev'.
 
 
 ## Screenshots:
